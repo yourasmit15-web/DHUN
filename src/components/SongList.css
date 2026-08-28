@@ -1,0 +1,75 @@
+.song-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.song-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.song-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.song-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.song-info {
+  flex: 1;
+}
+
+.song-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.song-artist {
+  margin: 5px 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.song-album {
+  margin: 3px 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.song-duration {
+  margin: 5px 0;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.play-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.play-btn:hover {
+  background: #ff5252;
+}
