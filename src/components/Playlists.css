@@ -1,0 +1,157 @@
+.playlists-container {
+  padding: 20px;
+}
+
+.playlists-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.playlists-header h2 {
+  margin: 0;
+  color: white;
+}
+
+.create-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.create-btn:hover {
+  background: #764ba2;
+}
+
+.create-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.create-form input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #667eea;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+}
+
+.create-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.create-form button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.create-form button:hover {
+  background: #764ba2;
+}
+
+.playlists-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.playlist-card {
+  background: linear-gradient(135deg, #2d2d44 0%, #3d3d54 100%);
+  border-radius: 8px;
+  padding: 15px;
+  color: white;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.playlist-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.playlist-header p {
+  margin: 5px 0 0 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.playlist-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.expand-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: opacity 0.3s ease;
+}
+
+.expand-btn:hover,
+.delete-btn:hover {
+  opacity: 0.7;
+}
+
+.playlist-songs {
+  margin-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 10px;
+}
+
+.playlist-song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 8px;
+  transition: background 0.3s ease;
+}
+
+.playlist-song:hover {
+  background: rgba(102, 126, 234, 0.3);
+}
+
+.playlist-song span {
+  font-size: 13px;
+}
+
+.duration {
+  opacity: 0.7;
+}
+
+.empty-message {
+  text-align: center;
+  opacity: 0.6;
+  font-size: 14px;
+  padding: 10px 0;
+  margin: 0;
+}
