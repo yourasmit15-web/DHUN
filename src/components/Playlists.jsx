@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import './Playlists.css';
 
-export default function Playlists({ playlists, songs, onPlaylistUpdate, onSongClick }) {
+export default function Playlists({ playlists, songs, onPlaylistUpdate, onSongClick, apiUrl }) {
   const [newPlaylistName, setNewPlaylistName] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
-
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   const createPlaylist = async () => {
     if (!newPlaylistName.trim()) return;
 
     try {
-      const response = await fetch(`${API_URL}/playlists`, {
+      const response = await fetch(`${apiUrl}/playlists`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: newPlaylistName, description: 'My playlist' })
@@ -29,7 +27,7 @@ export default function Playlists({ playlists, songs, onPlaylistUpdate, onSongCl
 
   const deletePlaylist = async (playlistId) => {
     try {
-      await fetch(`${API_URL}/playlists/${playlistId}`, {
+      await fetch(`${apiUrl}/playlists/${playlistId}`, {
         method: 'DELETE'
       });
       onPlaylistUpdate();

@@ -1,0 +1,8 @@
+{
+  "appId": "com.dhun.app",
+  "appName": "DHUN",
+  "webDir": "dist",
+  "server": {
+    "cleartext": true
+  }
+}

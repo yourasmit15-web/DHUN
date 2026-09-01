@@ -16,7 +16,9 @@ function App() {
   const [installPrompt, setInstallPrompt] = useState(null);
   const audioRef = useRef(null);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const API_URL = import.meta.env.VITE_API_URL
+    || (window.location.origin?.startsWith('http') ? `${window.location.origin}/api` : '')
+    || 'http://10.0.2.2:5000/api';
 
   useEffect(() => {
     fetchSongs();
@@ -161,6 +163,7 @@ function App() {
             songs={songs}
             onPlaylistUpdate={fetchPlaylists}
             onSongClick={playSong}
+            apiUrl={API_URL}
           />
         )}
       </main>

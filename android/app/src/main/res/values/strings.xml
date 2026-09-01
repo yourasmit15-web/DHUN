@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DHUN</string>
+    <string name="title_activity_main">DHUN</string>
+    <string name="package_name">com.dhun.app</string>
+    <string name="custom_url_scheme">com.dhun.app</string>
+</resources>

@@ -1,0 +1,5 @@
+package com.dhun.app;
+
+import com.getcapacitor.BridgeActivity;
+
+public class MainActivity extends BridgeActivity {}
