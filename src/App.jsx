@@ -13,6 +13,7 @@ function App() {
   const [playlists, setPlaylists] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
+  const [installPrompt, setInstallPrompt] = useState(null);
   const audioRef = useRef(null);
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -20,6 +21,16 @@ function App() {
   useEffect(() => {
     fetchSongs();
     fetchPlaylists();
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event) => {
+      event.preventDefault();
+      setInstallPrompt(event);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
   }, []);
 
   const fetchSongs = async () => {
@@ -72,6 +83,14 @@ function App() {
     }
   };
 
+  const installApp = async () => {
+    if (!installPrompt) return;
+
+    installPrompt.prompt();
+    await installPrompt.userChoice;
+    setInstallPrompt(null);
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -79,12 +98,19 @@ function App() {
           <h1 className="app-title">🎵 DHUN</h1>
           <p className="tagline">Free Music - No Subscription</p>
         </div>
-        <button 
-          className="search-btn"
-          onClick={() => setShowSearch(!showSearch)}
-        >
-          🔍 Search
-        </button>
+        <div className="header-actions">
+          {installPrompt && (
+            <button className="install-btn" onClick={installApp}>
+              ⬇️ Install App
+            </button>
+          )}
+          <button
+            className="search-btn"
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            🔍 Search
+          </button>
+        </div>
       </header>
 
       {showSearch && (
@@ -113,6 +139,7 @@ function App() {
             <SongList 
               songs={searchResults} 
               onSongClick={playSong}
+              apiUrl={API_URL}
             />
           </div>
         )}
@@ -123,6 +150,7 @@ function App() {
             <SongList 
               songs={songs} 
               onSongClick={playSong}
+              apiUrl={API_URL}
             />
           </div>
         )}
@@ -143,6 +171,7 @@ function App() {
           isPlaying={isPlaying}
           onTogglePlay={togglePlay}
           audioRef={audioRef}
+          apiUrl={API_URL}
         />
       )}
     </div>

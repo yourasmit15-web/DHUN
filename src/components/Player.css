@@ -55,6 +55,22 @@
   background: #ff5252;
 }
 
+.player-download-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.player-download-btn:hover {
+  background: #059669;
+}
+
 @media (max-width: 600px) {
   .player-content {
     flex-wrap: wrap;

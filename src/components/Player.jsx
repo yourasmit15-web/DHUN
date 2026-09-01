@@ -1,6 +1,8 @@
 import './Player.css';
 
-export default function Player({ song, isPlaying, onTogglePlay, audioRef }) {
+export default function Player({ song, isPlaying, onTogglePlay, audioRef, apiUrl }) {
+  const downloadUrl = `${apiUrl}/songs/${song.id}/download`;
+
   return (
     <div className="player">
       <div className="player-content">
@@ -12,6 +14,9 @@ export default function Player({ song, isPlaying, onTogglePlay, audioRef }) {
         <button className="player-play-btn" onClick={onTogglePlay}>
           {isPlaying ? '⏸ Pause' : '▶ Play'}
         </button>
+        <a className="player-download-btn" href={downloadUrl}>
+          ⬇ Download
+        </a>
       </div>
       <audio 
         ref={audioRef}

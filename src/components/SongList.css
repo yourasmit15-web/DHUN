@@ -73,3 +73,29 @@
 .play-btn:hover {
   background: #ff5252;
 }
+
+.song-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.song-actions > * {
+  flex: 1;
+  text-align: center;
+}
+
+.download-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  background: #059669;
+}

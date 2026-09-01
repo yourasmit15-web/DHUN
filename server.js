@@ -88,6 +88,11 @@ let playlists = [
 
 let playlistIdCounter = 3;
 
+const getSafeFileName = (value) => {
+  const sanitized = value.replace(/[^a-z0-9-_]+/gi, '_').replace(/^_+|_+$/g, '');
+  return sanitized || 'song';
+};
+
 // Routes
 
 // Get all songs - NO SUBSCRIPTION REQUIRED
@@ -102,11 +107,40 @@ app.get('/api/songs', (req, res) => {
 
 // Get song by ID
 app.get('/api/songs/:id', (req, res) => {
-  const song = mockSongs.find(s => s.id === parseInt(req.params.id));
+  const song = mockSongs.find(s => s.id === parseInt(req.params.id, 10));
   if (!song) {
     return res.status(404).json({ success: false, message: 'Song not found' });
   }
   res.json({ success: true, song });
+});
+
+// Download song
+app.get('/api/songs/:id/download', async (req, res) => {
+  const song = mockSongs.find(s => s.id === parseInt(req.params.id, 10));
+
+  if (!song) {
+    return res.status(404).json({ success: false, message: 'Song not found' });
+  }
+
+  const fileName = `${getSafeFileName(song.title)}.mp3`;
+
+  try {
+    const response = await axios.get(song.url, { responseType: 'stream', timeout: 20000 });
+    const contentType = response.headers['content-type'] || 'audio/mpeg';
+
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+
+    response.data.on('error', () => {
+      if (!res.headersSent) {
+        res.status(500).json({ success: false, message: 'Download stream failed' });
+      }
+    });
+
+    response.data.pipe(res);
+  } catch (error) {
+    res.status(502).json({ success: false, message: 'Unable to download song right now' });
+  }
 });
 
 // Search songs

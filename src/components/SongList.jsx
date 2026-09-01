@@ -1,6 +1,8 @@
 import './SongList.css';
 
-export default function SongList({ songs, onSongClick }) {
+export default function SongList({ songs, onSongClick, apiUrl }) {
+  const getDownloadUrl = (songId) => `${apiUrl}/songs/${songId}/download`;
+
   return (
     <div className="song-list">
       {songs.map((song) => (
@@ -12,7 +14,24 @@ export default function SongList({ songs, onSongClick }) {
             <p className="song-album">{song.album}</p>
             <p className="song-duration">⏱️ {song.duration}</p>
           </div>
-          <button className="play-btn">▶ Play</button>
+          <div className="song-actions">
+            <button
+              className="play-btn"
+              onClick={(event) => {
+                event.stopPropagation();
+                onSongClick(song);
+              }}
+            >
+              ▶ Play
+            </button>
+            <a
+              className="download-btn"
+              href={getDownloadUrl(song.id)}
+              onClick={(event) => event.stopPropagation()}
+            >
+              ⬇ Download
+            </a>
+          </div>
         </div>
       ))}
     </div>
